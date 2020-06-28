@@ -1,0 +1,55 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <a class="navbar-brand" href="/"
+    ><img src="/images/Klinka logo.png" alt="Klinka logo"
+  /></a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a href="/registration/login" class="nav-link">Login</a>
+      </li>
+      <li class="nav-item">
+        <a href="/registration/register" class="nav-link">Register</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<br />
+<div class="container">
+  <div class="row">
+    <div class="col-2">
+      <button onclick=" window.history.back()" class="btn btn-outline-primary">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+    </div>
+    <div class="col-5">
+      <h3>Terms and Conditions</h3>
+    </div>
+  </div>
+  <br />
+  <div>
+    <%- include('partials/terms-and-conditions') %>
+    </div>
+  </div>
+</div>
+    <div class="container">
+      <br />
+      <hr />
+      <h6>Klinka&copy;</h6>
+      2020 All copyrights reserved.
+      <a href="/terms-and-conditions" class="btn-link">Terms and Conditions</a>. Read your <a href="/privacy-policy" class="btn-link">Privay Policy</a>.
+    </div>

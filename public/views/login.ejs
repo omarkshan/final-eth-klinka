@@ -1,0 +1,119 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="/"
+    ><img src="/images/Klinka logo.png" alt="Klinka logo"
+  /></a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a href="/registration/login" class="nav-link active">Login</a>
+      </li>
+      <li class="nav-item">
+        <a href="/registration/register" class="nav-link">Register</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<br>
+<div class="container">
+<h3>Login</h3>
+<hr />
+<form action="/registration/login" method="POST" class="w-50">
+  <div class="form-group">
+    <label for="user_key">User Key</label>
+    <div class="row">
+      <div class="col-9">
+        <input
+          type="text"
+          name=""
+          id="user_key"
+          class="form-control"
+          placeholder="User Key"
+        />
+      </div>
+      <div class="col-1">
+        <div
+          class="btn btn-outline-dark"
+          title="Read QR code Key"
+          data-toggle="modal"
+          data-target="#QRModal"
+          onclick="start()"
+        >
+          <i class="fa fa-qrcode" aria-hidden="true"></i>
+        </div>
+      </div>
+      <div
+        class="modal fade"
+        id="QRModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="QRModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="QRModalLabel">QR Code</h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+                onclick="stop()"
+                id="closeReader"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <video src="" id="preview" style="width: 30em;"></video>
+              <br />
+              <div class="alert alert-info">
+                <strong><i class="fas fa-info-circle"></i> Info:</strong> <br />
+                Make Sure the QR code is visible
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input
+      type="password"
+      name=""
+      id="password"
+      class="form-control"
+      placeholder="Password"
+    />
+  </div>
+  <input type="submit" value="Login" class="btn btn-primary" />
+</form>
+<br />
+<div class="alert alert-warning">
+  <strong><i class="fas fa-exclamation-triangle"></i> Warning:</strong> Do not
+  share the <strong>User Key</strong> with anyone inside or outside the network!
+</div>
+</div>
+    <div class="container">
+      <br />
+      <hr />
+      <h6>Klinka&copy;</h6>
+      2020 All copyrights reserved.
+      <a href="/terms-and-conditions" class="btn-link">Terms and Conditions</a>. Read your <a href="/privacy-policy" class="btn-link">Privay Policy</a>.
+    </div>

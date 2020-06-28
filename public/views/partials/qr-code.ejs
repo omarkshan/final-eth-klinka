@@ -1,0 +1,54 @@
+<div class="col-3">
+          <button
+            type="button"
+            class="btn btn-outline-dark"
+            title="Generate QR Code"
+            data-toggle="modal"
+            data-target="#QRModal"
+          >
+            <i class="fas fa-qrcode"></i>
+          </button>
+          <div
+            class="modal fade"
+            id="QRModal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="QRModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="QRModalLabel">QR Code</h5>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="saveAsPDF">
+                    <img src="/images/Klinka logo.png" alt="Klinka logo" />
+                    <div id="qrcode"></div>
+                    <br />
+                    <div class="alert alert-danger">
+                      <strong
+                        ><i class="fas fa-exclamation-circle"></i> ALERT: <br />
+                        Do not lose it or share it with anyone outside or inside
+                        the network!</strong
+                      >
+                    </div>
+                    <br />
+                  </div>
+                  <div class="btn btn-success" onclick="createPDF()">
+                    <i class="fas fa-file-download"></i>&nbsp;Save as PDF
+                  </div>
+                  <br />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
