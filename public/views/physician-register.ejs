@@ -1,5 +1,5 @@
 <%- include('./partials/header') %>
-<br>
+<br />
 <div class="container">
   <div class="row">
     <div class="col-2">
@@ -18,156 +18,171 @@
       <label for="user_key">User Key</label>
       <div class="row">
         <div class="col-9">
-        <% var key %>
+          <% var key %>
           <input
-          type="text"
-          name="user_key"
-          id="user_key"
-          class="form-control"
-          value="<%= key %>"
-          readonly
+            type="text"
+            name="user_key"
+            id="user_key"
+            class="form-control"
+            value="<%= key %>"
+            readonly
           />
         </div>
         <%- include('partials/qr-code') %>
-  </div>
-  <div class="alert alert-primary">
-    <strong
-    ><i class="fas fa-info-circle"></i> Info: <br />Auto-generated <br />
-    To be saved for later access.. <br />
-    Do not lose it</strong
-    >
-  </div>
-</div>
+      </div>
+      <div class="alert alert-primary">
+        <strong
+          ><i class="fas fa-info-circle"></i> Info: <br />Auto-generated <br />
+          To be saved for later access.. <br />
+          Do not lose it</strong
+        >
+      </div>
+    </div>
 
-<div class="form-group">
-  <label for="password">Password</label>
-  <input
-  type="password"
-  name="password"
-  id="password"
-  class="form-control"
-  placeholder="Password"
-  required
-  />
-  <div class="alert alert-warning">
-    <strong
-    ><i class="fas fa-exclamation-triangle"></i> Warning: Password</strong
-    >
-    should contain atleast 1 letter and 1 special character
-  </div>
-</div>
-
-<div class="form-group">
-  <label for="confirm-password">Confirm Password</label>
-  <input
-  type="password"
-  name="password2"
-  id="password2"
-  class="form-control"
-  placeholder="Password"
-  required
-  />
-</div>
-
-<div class="form-group">
-  <label for="cv">CV</label>
-  <div class="custom-file">
-    <input type="file" accept=".pdf" class="custom-file-input" id="file" />
-    <label class="custom-file-label" for="file">Upload File..</label>
-  </div>
-  <div class="alert alert-warning">
-    <strong><i class="fas fa-exclamation-triangle"></i> Warning: File</strong>
-    format in .pdf
-  </div>
-</div>
-
-<div class="form-group">
-  <label for="dob">DOB</label>
-  <input
-  class="form-control"
-  type="date"
-  name="dob"
-  value="2011-08-19T13:45:00"
-  id="dob"
-  />
-</div>
-
-  <div class="form-group">
-    <label for="employed_since">Employed Since</label>
-    <input
-    class="form-control"
-    type="date"
-    name="employed_since"
-      value="2011-08-19T13:45:00"
-      id="dob"
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        name="email"
+        id="email"
+        class="form-control"
+        placeholder="Email"
+        value="<%= typeof email != 'undefined' ? email : '' %>"
+        required
       />
     </div>
-    
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        name="password"
+        id="password"
+        class="form-control"
+        placeholder="Password"
+        required
+      />
+      <div class="alert alert-warning">
+        <strong
+          ><i class="fas fa-exclamation-triangle"></i> Warning: Password</strong
+        >
+        should contain atleast 1 letter and 1 special character
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="confirm-password">Confirm Password</label>
+      <input
+        type="password"
+        name="password2"
+        id="password2"
+        class="form-control"
+        placeholder="Password"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="cv">CV</label>
+      <div class="custom-file">
+        <input type="file" accept=".pdf" class="custom-file-input" id="file" />
+        <label class="custom-file-label" for="file">Upload File..</label>
+      </div>
+      <div class="alert alert-warning">
+        <strong
+          ><i class="fas fa-exclamation-triangle"></i> Warning: File</strong
+        >
+        format in .pdf
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="dob">DOB</label>
+      <input
+        class="form-control"
+        type="date"
+        name="dob"
+        value="2011-08-19T13:45:00"
+        id="dob"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="employed_since">Employed Since</label>
+      <input
+        class="form-control"
+        type="date"
+        name="employed_since"
+        value="2011-08-19T13:45:00"
+        id="dob"
+      />
+    </div>
+
     <div class="form-group">
       <label>Gender</label>
       <div class="custom-control custom-radio">
         <input
-        type="radio"
-        class="custom-control-input"
-        id="male-radio"
-        name="gender"
-        required
+          type="radio"
+          class="custom-control-input"
+          id="male-radio"
+          name="gender"
+          required
         />
         <label class="custom-control-label" for="male-radio">Male</label>
       </div>
       <div class="custom-control custom-radio">
         <input
-        type="radio"
-        class="custom-control-input"
-        id="female-radio"
-        name="gender"
-        required
+          type="radio"
+          class="custom-control-input"
+          id="female-radio"
+          name="gender"
+          required
         />
         <label class="custom-control-label" for="female-radio">Female</label>
       </div>
     </div>
-    
+
     <div class="form-group">
       <label>Speciality</label>
       <%- include('partials/specialities') %>
-  </div>
-  
-  <!-- Button trigger modal -->
-  <button
-  type="button"
-  class="btn btn-dark"
-  data-toggle="modal"
-  data-target="#modal"
-  >
-  Terms and Conditions
-</button>
+    </div>
 
-<!-- Modal -->
-<div
-class="modal fade"
-id="modal"
-tabindex="-1"
-role="dialog"
-aria-labelledby="exampleModalLabel"
-aria-hidden="true"
->
-<div class="modal-dialog" role="document">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalLabel">
-        Terms and Conditions
-      </h5>
-      <button
+    <!-- Button trigger modal -->
+    <button
       type="button"
-      class="close"
-      data-dismiss="modal"
-      aria-label="Close"
-      >
-      <span aria-hidden="true">&times;</span>
+      class="btn btn-dark"
+      data-toggle="modal"
+      data-target="#modal"
+    >
+      Terms and Conditions
     </button>
-  </div>
-  <div class="modal-body">
-    <%- include('partials/terms-and-conditions') %>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="modal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Terms and Conditions
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <%- include('partials/terms-and-conditions') %>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal">
@@ -177,27 +192,27 @@ aria-hidden="true"
         </div>
       </div>
     </div>
-  </div>
-  
-  <div class="custom-control custom-checkbox">
-    <input
-    type="checkbox"
-    class="custom-control-input"
-    id="termsCheck"
-    name="terms-and-conditions"
-    required
-    />
-    <label class="custom-control-label" for="termsCheck"
-    >Agree on Terms and Conditions</label
-    >
-  </div>
+
+    <div class="custom-control custom-checkbox">
+      <input
+        type="checkbox"
+        class="custom-control-input"
+        id="termsCheck"
+        name="terms-and-conditions"
+        required
+      />
+      <label class="custom-control-label" for="termsCheck"
+        >Agree on Terms and Conditions</label
+      >
+    </div>
+    <br />
+    <input type="submit" value="Register" class="btn btn-primary" />
+  </form>
   <br />
-  <input type="submit" value="Register" class="btn btn-primary" />
-</form>
-<br />
-<div class="alert alert-warning">
-  <strong><i class="fas fa-exclamation-triangle"></i> Warning:</strong> Do not
-  share the <strong>User Key</strong> with anyone inside or outside the network!
-</div>
+  <div class="alert alert-warning">
+    <strong><i class="fas fa-exclamation-triangle"></i> Warning:</strong> Do not
+    share the <strong>User Key</strong> with anyone inside or outside the
+    network!
+  </div>
 </div>
 <%- include('./partials/footer') %>
