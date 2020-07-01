@@ -1,0 +1,111 @@
+<%- include('./partials/dashboard/header') %>
+<br />
+<div class="container">
+  <h4>Hello, Patient</h4>
+  <br />
+  <div class="row">
+    <div class="col-3">
+      <div
+        class="nav flex-column nav-pills"
+        id="tab"
+        role="tablist"
+        aria-orientation="vertical"
+      >
+        <a
+          class="nav-link"
+          id="profile-tab"
+          data-toggle="pill"
+          href="#profile"
+          role="tab"
+          aria-controls="profile"
+          aria-selected="false"
+        >
+          Personal Info
+        </a>
+        <a
+          class="nav-link"
+          id="messages-tab"
+          data-toggle="pill"
+          href="#messages"
+          role="tab"
+          aria-controls="messages"
+          aria-selected="false"
+        >
+          Messages <span class="badge badge-secondary">1</span>
+        </a>
+        <a
+          class="nav-link"
+          id="EHRs-tab"
+          data-toggle="pill"
+          href="#EHRs"
+          role="tab"
+          aria-controls="EHRs"
+          aria-selected="false"
+        >
+          EHRs
+        </a>
+        <a
+          class="nav-link"
+          id="settings-tab"
+          data-toggle="pill"
+          href="#settings"
+          role="tab"
+          aria-controls="settings"
+          aria-selected="false"
+        >
+          Settings
+        </a>
+      </div>
+    </div>
+
+    <div class="col-9">
+      <div class="tab-content" id="tabContent">
+        <!-- Personal Info tab -->
+        <%- include('./partials/dashboard/personal-info', {user: user}) %>
+
+        <!-- Messages tab -->
+        <%- include('./partials/dashboard/messaging-system') %>
+
+        <!-- EHRs tab -->
+        <% if (!user.isPhysician) { %> <%-
+        include('./partials/dashboard/ehr-patient') %> <% } %> <% if
+        (user.isPhysician) { %> <%-
+        include('./partials/dashboard/ehr-physician') %> <% } %>
+
+        <!-- Settings tab -->
+        <div
+          class="tab-pane fade"
+          id="settings"
+          role="tabpanel"
+          aria-labelledby="settings-tab"
+        >
+          <div class="row">
+            <!--Change Password-->
+            <%- include('./partials/dashboard/change-password') %>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <!--Request EHR Access-->
+            <% if (user.isPhysician) { %> <%-
+            include('./partials/dashboard/request-access') %> <% } %>
+            <!--Report Physician-->
+            <% if (!user.isPhysician) { %> <%-
+            include('./partials/dashboard/report-physician') %> <% } %>
+          </div>
+          <br />
+          <div class="row">
+            <!--Request History-->
+            <% if (!user.isPhysician) { %> <%-
+            include('./partials/dashboard/request-history') %> <% } %>
+            <!--Analyze Data-->
+            <% if (user.isPhysician) { %> <%-
+            include('./partials/dashboard/analyze-data') %> <% } %>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <!--Upload Data-->
+            <% if (user.isPhysician) { %> <%-
+            include('./partials/dashboard/upload-data') %> <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%- include('./partials/footer') %>
+</div>

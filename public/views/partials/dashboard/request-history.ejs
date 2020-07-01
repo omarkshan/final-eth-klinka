@@ -1,0 +1,66 @@
+<div class="card col-5">
+  <div class="card-body">
+    <h5 class="card-title">Request History</h5>
+    <p class="card-text">
+      Need your medical history? <br />May take from up to 24 hrs.
+    </p>
+    <br />
+    <button
+      type="button"
+      class="btn btn-outline-info"
+      data-toggle="modal"
+      data-target="#requestHistoryModal"
+    >
+      Submit Request
+    </button>
+  </div>
+  <div
+    class="modal fade"
+    id="requestHistoryModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="requestHistoryModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="requestHistoryModalLabel">
+            Request History
+          </h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="/request_history" method="post">
+            <div class="alert alert-warning">
+              <strong
+                ><i class="fas fa-exclamation-triangle"></i>
+                Warning:
+              </strong>
+              Processing your request could take a few minutes depending on your
+              number of records
+            </div>
+            <div class="alert alert-danger">
+              <strong><i class="fas fa-exclamation-triangle"></i></strong>
+              If your life is in danger please get treatment from the nearest
+              medical care provider you could reach!<br />
+              <strong
+                >DO NOT WAIT FOR YOUR MEDICAL RECORDS TO BE PROCCESSED!</strong
+              >
+            </div>
+            <button type="submit" class="btn btn-primary">
+              Request History
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

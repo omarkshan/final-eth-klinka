@@ -1,0 +1,144 @@
+<% var user %>
+<div
+  class="tab-pane fade"
+  id="profile"
+  role="tabpanel"
+  aria-labelledby="profile-tab"
+>
+  <form action="POST" class="w-75">
+    <div class="form-group">
+      <label for="user_key">User Key</label>
+      <input
+        type="text"
+        name="user_key"
+        id="user_key"
+        class="form-control"
+        value="<%= user.user_key %>"
+        placeholder="{User Key}"
+        readonly
+      />
+      <div class="alert alert-warning">
+        <strong>Warning:</strong> Do not share the
+        <strong>User Key</strong> with anyone inside or outside the network!
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        class="form-control"
+        type="email"
+        value="<%= user.email %>"
+        id="email"
+        disabled
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="dob">DOB</label>
+      <input
+        class="form-control"
+        type="text"
+        value="<%= user.dob.toLocaleDateString('en-US') %>"
+        id="dob"
+        disabled
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Gender</label>
+      <input
+        type="text"
+        name="gender"
+        id="gender"
+        class="form-control"
+        value="<%= user.gender %>"
+        disabled
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Age</label>
+      <input
+        type="text"
+        name="age"
+        id="gender"
+        class="form-control"
+        value="<%= Math.floor((Date.now() - user.dob) / (31557600000)) %>"
+        disabled
+      />
+    </div>
+
+    <!--Patient-->
+    <% if (!user.isPhysician) { %>
+    <div class="form-group">
+      <label>Effort</label>
+      <div class="custom-control custom-radio">
+        <input
+          type="radio"
+          class="custom-control-input"
+          id="low-effort-radio"
+          name="job"
+          required
+        />
+        <label class="custom-control-label" for="low-effort-radio"
+          >Low (I hardly do any activity on a daily basis)</label
+        >
+      </div>
+      <div class="custom-control custom-radio">
+        <input
+          type="radio"
+          class="custom-control-input"
+          id="med-effort-radio"
+          name="job"
+          required
+        />
+        <label class="custom-control-label" for="med-effort-radio"
+          >Med (I often do effort on a daily basis including at my work)</label
+        >
+      </div>
+      <div class="custom-control custom-radio">
+        <input
+          type="radio"
+          class="custom-control-input"
+          id="high-effort-radio"
+          name="job"
+          required
+        />
+        <label class="custom-control-label" for="high-effort-radio"
+          >High (I do high effort daily / I am an active worker)</label
+        >
+      </div>
+    </div>
+    <% } %>
+
+    <!--Physician-->
+    <% if (user.isPhysician) { %>
+    <div class="form-group">
+      <label>Speciality</label>
+      <input
+        type="text"
+        name="speciality"
+        id="speciality"
+        class="form-control"
+        value="<%= user.speciality %>"
+        disabled
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Employed Since</label>
+      <input
+        type="date"
+        name="employed_since"
+        id="employed-since"
+        class="form-control"
+        value="<%= user.employed_since %>"
+        disabled
+      />
+    </div>
+    <% } %>
+    <br />
+    <input type="submit" value="Save" class="btn btn-outline-info" />
+  </form>
+</div>

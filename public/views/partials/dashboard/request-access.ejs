@@ -1,0 +1,63 @@
+<div class="card col-5">
+  <div class="card-body">
+    <h5 class="card-title">Request Access</h5>
+    <p class="card-text">
+      Want to have access over patient's EHRs? <br />Submit a request to the
+      patient..
+    </p>
+    <button
+      type="button"
+      class="btn btn-outline-info"
+      data-toggle="modal"
+      data-target="#submit-modal"
+    >
+      Request Access
+    </button>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="submit-modal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="submit_label"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="submit_label">
+              Data Access Request
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <label for="patient-id">Patient PID</label>
+              <br />
+              <input
+                type="text"
+                name="patient-id"
+                id="patient-id"
+                placeholder="Patient PID"
+              />
+              <br /><br />
+              <input
+                type="submit"
+                value="Send Request"
+                class="btn btn-outline-info"
+              />
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

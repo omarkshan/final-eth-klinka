@@ -1,33 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="/"
-    ><img src="/images/Klinka logo.png" alt="Klinka logo"
-  /></a>
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="/">Home</a>
-      </li>
-      <li class="nav-item">
-        <a href="/registration/login" class="nav-link">Login</a>
-      </li>
-      <li class="nav-item">
-        <a href="/registration/register" class="nav-link active">Register</a>
-      </li>
-    </ul>
-  </div>
-</nav>
+<%- include('./partials/header') %>
 <br>
 <div class="container">
   <div class="row">
@@ -40,8 +11,9 @@
       <h3>Physician Registeration</h3>
     </div>
   </div>
+  <%- include('./partials/messages') %>
   <hr />
-  <form action="/registration/physician" method="POST" class="w-75">
+  <form action="/auth/physician" method="POST" class="w-75">
     <div class="form-group">
       <label for="user_key">User Key</label>
       <div class="row">
@@ -49,7 +21,7 @@
         <% var key %>
           <input
           type="text"
-          name=""
+          name="user_key"
           id="user_key"
           class="form-control"
           value="<%= key %>"
@@ -71,7 +43,7 @@
   <label for="password">Password</label>
   <input
   type="password"
-  name=""
+  name="password"
   id="password"
   class="form-control"
   placeholder="Password"
@@ -89,8 +61,8 @@
   <label for="confirm-password">Confirm Password</label>
   <input
   type="password"
-  name=""
-  id="password"
+  name="password2"
+  id="password2"
   class="form-control"
   placeholder="Password"
   required
@@ -114,16 +86,18 @@
   <input
   class="form-control"
   type="date"
+  name="dob"
   value="2011-08-19T13:45:00"
   id="dob"
   />
 </div>
 
   <div class="form-group">
-    <label for="dob">Employed Since</label>
+    <label for="employed_since">Employed Since</label>
     <input
     class="form-control"
     type="date"
+    name="employed_since"
       value="2011-08-19T13:45:00"
       id="dob"
       />
@@ -210,6 +184,7 @@ aria-hidden="true"
     type="checkbox"
     class="custom-control-input"
     id="termsCheck"
+    name="terms-and-conditions"
     required
     />
     <label class="custom-control-label" for="termsCheck"
@@ -225,10 +200,4 @@ aria-hidden="true"
   share the <strong>User Key</strong> with anyone inside or outside the network!
 </div>
 </div>
-    <div class="container">
-      <br />
-      <hr />
-      <h6>Klinka&copy;</h6>
-      2020 All copyrights reserved.
-      <a href="/terms-and-conditions" class="btn-link">Terms and Conditions</a>. Read your <a href="/privacy-policy" class="btn-link">Privay Policy</a>.
-    </div>
+<%- include('./partials/footer') %>

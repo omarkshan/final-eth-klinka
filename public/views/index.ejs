@@ -1,40 +1,4 @@
-<nav class="navbar navbar-expand-sm fixed-top navbar-dark" style="background-color: rgba(0.2, 0.2, 0.2, 0.2);">
-  <a class="navbar-brand" href="/"
-    ><img src="/images/Klinka logo.png" alt="Klinka logo"
-  /></a>
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link active" href="/">Home</a>
-      </li>
-      <li class="nav-item">
-        <a href="/registration/login" class="nav-link">Login</a>
-      </li>
-      <li class="nav-item">
-        <a href="/registration/register" class="nav-link">Register</a>
-      </li>
-      <li class="nav-item">
-        <a href="/documentation" class="nav-link btn btn-outline-info">Documentation</a>
-      </li>
-      &nbsp;&nbsp;&nbsp;
-      <li class="nav-item">
-        <a href="https://github.com/omarkshan/klinka-proto" class="nav-link btn btn-outline-secondary">Github Repo</a>
-      </li>
-    </ul>
-  </div>
-</nav>
+<%- include('./partials/header-main') %>
 <header>
   <div class="overlay"></div>
   <video
@@ -69,12 +33,6 @@
         </p>
   </div>
   <h4>Join the network now..</h4>
-  <a href="/registration/register" class="btn btn-outline-info">Go</a>
+  <a href="/auth/register" class="btn btn-outline-info">Go</a>
 </div>
-    <div class="container">
-      <br />
-      <hr />
-      <h6>Klinka&copy;</h6>
-      2020 All copyrights reserved.
-      <a href="/terms-and-conditions" class="btn-link">Terms and Conditions</a>. Read your <a href="/privacy-policy" class="btn-link">Privay Policy</a>.
-    </div>
+<%- include('./partials/footer') %>

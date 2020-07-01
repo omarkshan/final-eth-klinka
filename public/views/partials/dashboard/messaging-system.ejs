@@ -1,0 +1,172 @@
+<div
+  class="tab-pane fade"
+  id="messages"
+  role="tabpanel"
+  aria-labelledby="messages-tab"
+>
+  <div class="row">
+    <button
+      type="button"
+      class="btn btn-outline-success"
+      data-toggle="modal"
+      data-target="#compose"
+    >
+      <i class="fas fa-plus"></i> Compose
+    </button>
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="compose"
+      data-backdrop="static"
+      data-keyboard="false"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="compose"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="compose">
+              Compose Message
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="/compose" method="post">
+              <div class="form-group">
+                <label for="patient-id">Patient Id</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="patient-id"
+                  placeholder="Patient ID"
+                />
+              </div>
+              <div class="form-group">
+                <label for="content">Content</label>
+                <textarea class="form-control" id="content" rows="3"></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-outline-danger"
+              data-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button type="button" class="btn btn-outline-info">
+              Send
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    &nbsp;&nbsp;
+    <button class="btn btn-outline-info">
+      <i class="fas fa-paper-plane"></i> Sent
+    </button>
+    &nbsp;&nbsp;
+    <button class="btn btn-outline-info">
+      <i class="fas fa-envelope"></i> Recieved
+    </button>
+  </div>
+  <br />
+  <div class="accordion" id="accordionExample">
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h2 class="mb-0">
+          <button
+            class="btn btn-link btn-block text-left"
+            type="button"
+            data-toggle="collapse"
+            data-target="#collapseOne"
+            aria-expanded="true"
+            aria-controls="collapseOne"
+          >
+            Subject: <strong>{Subject}</strong>
+            <span class="badge badge-secondary">New</span>
+            <br />
+            From: <strong>{Sender}</strong>
+            <br />
+            Type: <strong>{Feedback}</strong>
+          </button>
+        </h2>
+      </div>
+
+      <div
+        id="collapseOne"
+        class="collapse"
+        aria-labelledby="headingOne"
+        data-parent="#accordionExample"
+      >
+        <div class="card-body">
+          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
+          terry richardson ad squid. 3 wolf moon officia aute, non cupidatat
+          skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+          Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
+          single-origin coffee nulla assumenda shoreditch et. Nihil anim
+          keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
+          sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
+          occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt
+          you probably haven't heard of them accusamus labore sustainable VHS.
+          <br />
+          <button class="btn btn-outline-danger" title="Delete">
+            <i class="fas fa-trash"></i>
+          </button>
+          <button class="btn btn-outline-success" title="Reply">
+            <i class="fas fa-reply"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingTwo">
+        <h2 class="mb-0">
+          <button
+            class="btn btn-link btn-block text-left collapsed"
+            type="button"
+            data-toggle="collapse"
+            data-target="#collapseTwo"
+            aria-expanded="false"
+            aria-controls="collapseTwo"
+          >
+            Subject: <strong>{Subject}</strong>
+            <br />
+            From: <strong>{Sender}</strong>
+            <br />
+            Type: <strong>{Request}</strong>
+          </button>
+        </h2>
+      </div>
+      <div
+        id="collapseTwo"
+        class="collapse"
+        aria-labelledby="headingTwo"
+        data-parent="#accordionExample"
+      >
+        <div class="card-body">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo ducimus
+          optio necessitatibus quae aliquid ratione veritatis voluptas similique
+          explicabo asperiores tempore expedita aut autem, quis omnis laborum
+          dolorem minus eos?
+          <br />
+          <button class="btn btn-outline-info">Accept</button>
+          <button class="btn btn-outline-danger">Decline</button>
+          <button class="btn btn-outline-danger" title="Delete">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
