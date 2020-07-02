@@ -1,19 +1,21 @@
 const express = require("express");
 const router = express.Router();
 const { check, validationResult } = require("express-validator");
-const passport = require('passport')
-const bcrypt = require('bcryptjs')
+const passport = require("passport");
+const bcrypt = require("bcryptjs");
 
 const User = require("../models/User");
 const { forwardAuthenticated } = require("../config/auth");
 const { uuid } = require("uuidv4");
 
 // Login Page
-router.get("/login", forwardAuthenticated, (req, res) => { 
-  res.render("login", {title: "Klinka :: Login"})
+router.get("/login", forwardAuthenticated, (req, res) => {
+  res.render("login", { title: "Klinka :: Login" });
 });
 // Register Page
-router.get("/register", (req, res) => res.render("register", {title: "Klinka :: Register"}));
+router.get("/register", (req, res) =>
+  res.render("register", { title: "Klinka :: Register" })
+);
 // Patient Registration Page
 router.get("/patient-register", forwardAuthenticated, (req, res) => {
   const key = uuid();
@@ -84,7 +86,7 @@ router.post(
       gender,
       effort,
     } = req.body;
-    if (errors) {
+    if (errors.length > 1) {
       res.render("patient-register", {
         title: "Klinka :: Patient Registration",
         key: uuid(),
@@ -116,7 +118,10 @@ router.post(
             errors: errors,
           });
         } else {
-          const alias = firstName.substring(1,2) + lastName.substring(1,2) + PID.substring(1,8)
+          const alias =
+            firstName.substring(1, 2) +
+            lastName.substring(1, 2) +
+            PID.substring(1, 8);
           const newUser = new User({
             user_key,
             PID,
@@ -140,10 +145,10 @@ router.post(
                 .save()
                 .then((user) => {
                   req.flash(
-                    'success_msg',
-                    'You are now registered and can log in'
+                    "success_msg",
+                    "You are now registered and can log in"
                   );
-                  res.redirect('/auth/login');
+                  res.redirect("/auth/login");
                 })
                 .catch((err) => console.log(err));
             });
@@ -198,9 +203,9 @@ router.post(
     const {
       user_key,
       PID,
+      email,
       firstName,
       lastName,
-      email,
       password,
       password2,
       dob,
@@ -208,7 +213,8 @@ router.post(
       gender,
       speciality,
     } = req.body;
-    if (errors) {
+    if (errors.length > 1) {
+      console.log('Errors Found')
       res.render("physician-register", {
         title: "Klinka :: Physician Registration",
         key: uuid(),
@@ -224,6 +230,7 @@ router.post(
       });
     } else {
       // If Validation Passed
+      console.log('Searching for existing Physician')
       User.findOne({ email: email }).then((user) => {
         if (user) {
           // Physician Exists
@@ -242,7 +249,10 @@ router.post(
             errors: errors,
           });
         } else {
-          const alias = firstName.substring(1,2) + lastName.substring(1,2) + PID.substring(1,8)
+          const alias =
+            firstName.substring(1, 2) +
+            lastName.substring(1, 2) +
+            PID.substring(1, 8);
           const newUser = new User({
             user_key,
             PID,
@@ -258,6 +268,7 @@ router.post(
           });
 
           // Hashing Password
+          console.log('Checking Password')
           bcrypt.genSalt(10, (err, salt) => {
             bcrypt.hash(newUser.password, salt, (err, hash) => {
               if (err) console.error(err);
@@ -266,11 +277,12 @@ router.post(
               newUser
                 .save()
                 .then((user) => {
+                  console.log('Physician Registered')
                   req.flash(
-                    'success_msg',
-                    'You are now registered and can log in'
+                    "success_msg",
+                    "You are now registered and can log in"
                   );
-                  res.redirect('/auth/login');
+                  res.redirect("/auth/login");
                 })
                 .catch((err) => console.log(err));
             });
@@ -282,19 +294,19 @@ router.post(
 );
 
 // Login
-router.post('/login', (req, res, next) => {
-  passport.authenticate('local', {
-    successRedirect: '/dashboard',
-    failureRedirect: '/auth/login',
-    failureFlash: true
+router.post("/login", (req, res, next) => {
+  passport.authenticate("local", {
+    successRedirect: "/dashboard",
+    failureRedirect: "/auth/login",
+    failureFlash: true,
   })(req, res, next);
 });
 
 // Logout
-router.get('/logout', (req, res) => {
+router.get("/logout", (req, res) => {
   req.logout();
-  req.flash('success_msg', 'You are logged out');
-  res.redirect('/auth/login');
+  req.flash("success_msg", "You are logged out");
+  res.redirect("/auth/login");
 });
 
 module.exports = router;

@@ -1,28 +1,28 @@
 const mongoose = require('mongoose')
 
 const messageSchema = new mongoose.Schema({
-    user_key: {
+    sender: {
+        type: String,
+        required: true
+    },
+    receiver: {
         type: String,
         required: true
     },
     subject: {
-        type: [String],
-        required: true
-    },
-    from: {
-        type: [String],
+        type: String,
         required: true
     },
     type: {
-        type: [String],
+        type: String,
         required: true
     },
     content: {
-        type: [String],
+        type: String,
         required: true
     },
-    isSent: {
-        type: [Boolean],
+    isNew: {
+        type: Boolean,
         required: true
     }
 })
