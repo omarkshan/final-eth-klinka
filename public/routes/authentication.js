@@ -159,9 +159,9 @@ router.post(
                 .then((user) => {
                   var emailBody = `<img src="cid:logo"><br><h3>Registration is Successful</h3><p>Your request to create a new <strong>Patient</strong> account was completed successfully.<br>You can now log in from <a href="klinka.herokuapp.com/auth/login">Klinka Login</a> to use the platform</p>
                   <h5>Account Credentials</h5>
-                  <p>User Key: ${newUser.user_key} <br>PID: ${newUser.PID} <br><hr><br><strong>DO NOT SHARE THE USER KEY WITH ANYONE INSIDE OR OUTSIDE THE NETWORK!</strong></p><br><hr><p><strong>Klinka&copy;</strong>&nbsp;All Copyrights reserved.`;
+                  <p><strong>User Key:</strong> ${newUser.user_key} <br><strong>PID:</strong> ${newUser.PID} <br><hr><br><strong>DO NOT SHARE THE USER KEY WITH ANYONE INSIDE OR OUTSIDE THE NETWORK!</strong></p><br><hr><p><strong>Klinka&copy;</strong>&nbsp;All Copyrights reserved.`;
                   var mailOptions = {
-                    from: "omar.shan99@gmail.com",
+                    from: process.env.SENDER_MAIL,
                     to: `${newUser.email}`,
                     subject: "Klinka Patient Registration",
                     attachments: [
@@ -181,7 +181,7 @@ router.post(
 
                   req.flash(
                     "success_msg",
-                    "You are now registered and can log in"
+                    "Please check your email inbox, You are now registered and can log in"
                   );
                   res.redirect("/auth/login");
                 })
@@ -315,9 +315,9 @@ router.post(
                   console.log("Physician Registered");
                   var emailBody = `<img src="cid:logo"><br><h3>Registration is Successful</h3><p>Your request to create a new <strong>Patient</strong> account was completed successfully.<br>You can now log in from <a href="klinka.herokuapp.com/auth/login">Klinka Login</a> to use the platform</p>
                   <h5>Account Credentials</h5>
-                  <p>User Key: ${newUser.user_key} <br>PID: ${newUser.PID} <br><hr><br><strong>DO NOT SHARE THE USER KEY WITH ANYONE INSIDE OR OUTSIDE THE NETWORK!</strong></p><br><hr><p><strong>Klinka&copy;</strong>&nbsp;All Copyrights reserved.`;
+                  <p><strong>User Key:</strong> ${newUser.user_key} <br><strong>PID:</strong> ${newUser.PID} <br><hr><br><strong>DO NOT SHARE THE USER KEY WITH ANYONE INSIDE OR OUTSIDE THE NETWORK!</strong></p><br><hr><p><strong>Klinka&copy;</strong>&nbsp;All Copyrights reserved.`;
                   var mailOptions = {
-                    from: "omar.shan99@gmail.com",
+                    from: process.env.SENDER_MAIL,
                     to: `${newUser.email}`,
                     subject: "Klinka Patient Registration",
                     attachments: [
@@ -336,7 +336,7 @@ router.post(
                   });
                   req.flash(
                     "success_msg",
-                    "You are now registered and can log in"
+                    "Please check your email inbox, You are now registered and can log in"
                   );
                   res.redirect("/auth/login");
                 })
