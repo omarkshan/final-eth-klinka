@@ -1,4 +1,5 @@
 const express = require("express");
+require('dotenv').config()
 const router = express.Router();
 const { check, validationResult } = require("express-validator");
 const passport = require("passport");
@@ -7,6 +8,18 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/User");
 const { forwardAuthenticated } = require("../config/auth");
 const { uuid } = require("uuidv4");
+
+const nodemailer = require("nodemailer");
+var transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false,
+  requireTLS: true,
+  auth: {
+    user: process.env.SENDER_MAIL,
+    pass: process.env.MAIL_PASS,
+  },
+});
 
 // Login Page
 router.get("/login", forwardAuthenticated, (req, res) => {
@@ -144,6 +157,28 @@ router.post(
               newUser
                 .save()
                 .then((user) => {
+                  var emailBody = `<img src="cid:logo"><br><h3>Registration is Successful</h3><p>Your request to create a new <strong>Patient</strong> account was completed successfully.<br>You can now log in from <a href="klinka.herokuapp.com/auth/login">Klinka Login</a> to use the platform</p>
+                  <h5>Account Credentials</h5>
+                  <p>User Key: ${newUser.user_key} <br>PID: ${newUser.PID} <br><hr><br><strong>DO NOT SHARE THE USER KEY WITH ANYONE INSIDE OR OUTSIDE THE NETWORK!</strong></p><br><hr><p><strong>Klinka&copy;</strong>&nbsp;All Copyrights reserved.`;
+                  var mailOptions = {
+                    from: "omar.shan99@gmail.com",
+                    to: `${newUser.email}`,
+                    subject: "Klinka Patient Registration",
+                    attachments: [
+                      {
+                        filename: "Klinka logo.png",
+                        path: "./public/images/Klinka logo.png",
+                        cid: "logo",
+                      },
+                    ],
+                    html: emailBody,
+                  };
+
+                  transporter.sendMail(mailOptions, function (error, info) {
+                    if (error) console.log(error);
+                    else console.log(`Email sent: ${info.response}`);
+                  });
+
                   req.flash(
                     "success_msg",
                     "You are now registered and can log in"
@@ -214,7 +249,7 @@ router.post(
       speciality,
     } = req.body;
     if (errors.length > 1) {
-      console.log('Errors Found')
+      console.log("Errors Found");
       res.render("physician-register", {
         title: "Klinka :: Physician Registration",
         key: uuid(),
@@ -230,7 +265,7 @@ router.post(
       });
     } else {
       // If Validation Passed
-      console.log('Searching for existing Physician')
+      console.log("Searching for existing Physician");
       User.findOne({ email: email }).then((user) => {
         if (user) {
           // Physician Exists
@@ -268,7 +303,7 @@ router.post(
           });
 
           // Hashing Password
-          console.log('Checking Password')
+          console.log("Checking Password");
           bcrypt.genSalt(10, (err, salt) => {
             bcrypt.hash(newUser.password, salt, (err, hash) => {
               if (err) console.error(err);
@@ -277,7 +312,28 @@ router.post(
               newUser
                 .save()
                 .then((user) => {
-                  console.log('Physician Registered')
+                  console.log("Physician Registered");
+                  var emailBody = `<img src="cid:logo"><br><h3>Registration is Successful</h3><p>Your request to create a new <strong>Patient</strong> account was completed successfully.<br>You can now log in from <a href="klinka.herokuapp.com/auth/login">Klinka Login</a> to use the platform</p>
+                  <h5>Account Credentials</h5>
+                  <p>User Key: ${newUser.user_key} <br>PID: ${newUser.PID} <br><hr><br><strong>DO NOT SHARE THE USER KEY WITH ANYONE INSIDE OR OUTSIDE THE NETWORK!</strong></p><br><hr><p><strong>Klinka&copy;</strong>&nbsp;All Copyrights reserved.`;
+                  var mailOptions = {
+                    from: "omar.shan99@gmail.com",
+                    to: `${newUser.email}`,
+                    subject: "Klinka Patient Registration",
+                    attachments: [
+                      {
+                        filename: "Klinka logo.png",
+                        path: "./public/images/Klinka logo.png",
+                        cid: "logo",
+                      },
+                    ],
+                    html: emailBody,
+                  };
+
+                  transporter.sendMail(mailOptions, function (error, info) {
+                    if (error) console.log(error);
+                    else console.log(`Email sent: ${info.response}`);
+                  });
                   req.flash(
                     "success_msg",
                     "You are now registered and can log in"
