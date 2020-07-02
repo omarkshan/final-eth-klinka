@@ -84,7 +84,7 @@ router.post(
       gender,
       effort,
     } = req.body;
-    if (!errors) {
+    if (errors) {
       res.render("patient-register", {
         title: "Klinka :: Patient Registration",
         key: uuid(),
@@ -208,7 +208,7 @@ router.post(
       gender,
       speciality,
     } = req.body;
-    if (!errors) {
+    if (errors) {
       res.render("physician-register", {
         title: "Klinka :: Physician Registration",
         key: uuid(),
