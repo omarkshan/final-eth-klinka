@@ -40,6 +40,31 @@
     </div>
 
     <div class="form-group">
+      <label for="PID">PID</label>
+      <div class="row">
+        <div class="col-9">
+          <input
+            type="text"
+            name="PID"
+            id="PID"
+            class="form-control"
+            value= "<%= PID %>"
+            readonly
+          />
+        </div>
+        <%- include('partials/qr-code2') %>
+      </div>
+      <div class="alert alert-primary">
+        <strong
+          ><i class="fas fa-info-circle"></i> Info: <br />
+          Auto-generated <br />
+          To be able to recieve messages and requests.. <br />
+          Do not lose it
+        </strong>
+      </div>
+    </div>
+
+    <div class="form-group">
       <label for="email">Email</label>
       <input
         type="email"
@@ -48,6 +73,32 @@
         class="form-control"
         placeholder="Email"
         value="<%= typeof email != 'undefined' ? email : '' %>"
+        required
+      />
+    </div>
+    
+    <div class="form-group">
+      <label for="email">First Name</label>
+      <input
+        type="text"
+        name="firstName"
+        id="firstName"
+        class="form-control"
+        placeholder="First Name"
+        value="<%= typeof firstName != 'undefined' ? firstName : '' %>"
+        required
+      />
+    </div>
+    
+    <div class="form-group">
+      <label for="email">Last Name</label>
+      <input
+        type="text"
+        name="lastName"
+        id="lastName"
+        class="form-control"
+        placeholder="Last Name"
+        value="<%= typeof lastName != 'undefined' ? lastName : '' %>"
         required
       />
     </div>
@@ -83,20 +134,6 @@
     </div>
 
     <div class="form-group">
-      <label for="cv">CV</label>
-      <div class="custom-file">
-        <input type="file" accept=".pdf" class="custom-file-input" id="file" />
-        <label class="custom-file-label" for="file">Upload File..</label>
-      </div>
-      <div class="alert alert-warning">
-        <strong
-          ><i class="fas fa-exclamation-triangle"></i> Warning: File</strong
-        >
-        format in .pdf
-      </div>
-    </div>
-
-    <div class="form-group">
       <label for="dob">DOB</label>
       <input
         class="form-control"
@@ -112,7 +149,7 @@
       <input
         class="form-control"
         type="date"
-        name="employed_since"
+        name="employedSince"
         value="2011-08-19T13:45:00"
         id="dob"
       />
@@ -191,6 +228,7 @@
           </div>
         </div>
       </div>
+    </div>
     </div>
 
     <div class="custom-control custom-checkbox">

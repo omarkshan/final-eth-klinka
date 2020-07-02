@@ -68,20 +68,23 @@
     <div class="form-group">
       <label for="password">Password</label>
       <input
-        type="password"
+      type="password"
         name="password"
         id="password"
         class="form-control"
         placeholder="Password"
-      />
+        />
+      </div>
+      <input type="submit" value="Login" class="btn btn-primary" />
+    </form>
+    <br>
+    <div class="alert alert-warning">
+      <strong><i class="fas fa-exclamation-triangle"></i> Warning:</strong> Do not
+      share the <strong>User Key</strong> with anyone inside or outside the
+      network!
     </div>
-    <input type="submit" value="Login" class="btn btn-primary" />
-  </form>
-  <br />
-  <div class="alert alert-warning">
-    <strong><i class="fas fa-exclamation-triangle"></i> Warning:</strong> Do not
-    share the <strong>User Key</strong> with anyone inside or outside the
-    network!
+    <div>
+      New to the Platform?&nbsp;&nbsp;<a href="/auth/register" class="btn-link">Register</a>
+    </div>
   </div>
-</div>
 <%- include('./partials/footer') %>

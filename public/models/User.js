@@ -3,16 +3,17 @@ const mongoose = require('mongoose')
 const userSchema = new mongoose.Schema({
     user_key: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
-    firstName: {
+    PID: {
         type: String,
-        maxlength: 35,
-        required: true
+        required: true,
+        unique: true
     },
-    lastName: {
+    alias: {
         type: String,
-        maxlength: 35,
+        maxlength: 10,
         required: true
     },
     email: {

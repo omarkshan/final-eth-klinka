@@ -5,24 +5,24 @@ const messageSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    EHR_id: {
+    subject: {
         type: [String],
         required: true
     },
-    EHR_date: {
+    from: {
         type: [String],
         required: true
     },
-    EHR_symptoms: {
+    type: {
         type: [String],
         required: true
     },
-    EHR_severity: {
+    content: {
         type: [String],
         required: true
     },
-    EHR_Notes: {
-        type: [String],
+    isSent: {
+        type: [Boolean],
         required: true
     }
 })

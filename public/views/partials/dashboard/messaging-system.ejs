@@ -1,3 +1,4 @@
+<% var user %> 
 <div
   class="tab-pane fade"
   id="messages"
@@ -42,12 +43,24 @@
           <div class="modal-body">
             <form action="/compose" method="post">
               <div class="form-group">
-                <label for="patient-id">Patient Id</label>
+                <label for="from">From</label>
                 <input
                   type="text"
                   class="form-control"
-                  id="patient-id"
-                  placeholder="Patient ID"
+                  id="from"
+                  name="from"
+                  value="<%= user.PID %> "
+                  placeholder="From"
+                  disabled
+                />
+              </div>
+              <div class="form-group">
+                <label for="PID">PID</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="PID"
+                  placeholder="PID"
                 />
               </div>
               <div class="form-group">

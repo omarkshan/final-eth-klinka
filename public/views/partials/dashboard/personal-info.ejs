@@ -1,25 +1,55 @@
 <% var user %>
 <div
-  class="tab-pane fade"
+  class="tab-pane fade active show"
   id="profile"
   role="tabpanel"
   aria-labelledby="profile-tab"
 >
-  <form action="POST" class="w-75">
+  <form action="/dashboard/updatePatient" method="POST" class="w-75">
     <div class="form-group">
-      <label for="user_key">User Key</label>
-      <input
-        type="text"
-        name="user_key"
-        id="user_key"
-        class="form-control"
-        value="<%= user.user_key %>"
-        placeholder="{User Key}"
-        readonly
-      />
-      <div class="alert alert-warning">
-        <strong>Warning:</strong> Do not share the
-        <strong>User Key</strong> with anyone inside or outside the network!
+      <div class="row">
+        <div class="col-11">
+          <label for="user_key">User Key</label>
+          <input
+            type="text"
+            name="user_key"
+            id="user_key"
+            class="form-control"
+            value="<%= user.user_key %>"
+            placeholder="{User Key}"
+            readonly
+          />
+          <div class="alert alert-warning">
+            <strong>Warning:</strong> Do not share the
+            <strong>User Key</strong> with anyone inside or outside the network!
+          </div>
+        </div>
+        <div class="col-1">
+          <%- include('../qr-code') %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <div class="row">
+        <div class="col-11">
+          <label for="PID">PID</label>
+          <input
+            type="text"
+            name="PID"
+            id="PID"
+            class="form-control"
+            value="<%= user.PID %>"
+            placeholder="{PID}"
+            readonly
+          />
+          <div class="alert alert-warning">
+            <strong>Warning:</strong> Share it with only whom you trust!
+          </div>
+        </div>
+        <div class="col-1">
+          <%- include('../qr-code2') %>
+        </div>
       </div>
     </div>
 
@@ -30,7 +60,7 @@
         type="email"
         value="<%= user.email %>"
         id="email"
-        disabled
+        name="email"
       />
     </div>
 
@@ -78,7 +108,8 @@
           type="radio"
           class="custom-control-input"
           id="low-effort-radio"
-          name="job"
+          name="effort"
+          value="Low"
           required
         />
         <label class="custom-control-label" for="low-effort-radio"
@@ -90,7 +121,8 @@
           type="radio"
           class="custom-control-input"
           id="med-effort-radio"
-          name="job"
+          name="effort"
+          value="Med"
           required
         />
         <label class="custom-control-label" for="med-effort-radio"
@@ -102,7 +134,8 @@
           type="radio"
           class="custom-control-input"
           id="high-effort-radio"
-          name="job"
+          name="effort"
+          value="High"
           required
         />
         <label class="custom-control-label" for="high-effort-radio"
@@ -129,16 +162,18 @@
     <div class="form-group">
       <label>Employed Since</label>
       <input
-        type="date"
+        type="text"
         name="employed_since"
         id="employed-since"
         class="form-control"
-        value="<%= user.employed_since %>"
+        value="<%= user.employedSince.toLocaleDateString('en-US') %>"
         disabled
       />
     </div>
     <% } %>
     <br />
+    <% if (!user.isPhysician) { %>
     <input type="submit" value="Save" class="btn btn-outline-info" />
+    <% } %> 
   </form>
 </div>

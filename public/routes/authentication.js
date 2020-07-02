@@ -17,16 +17,20 @@ router.get("/register", (req, res) => res.render("register", {title: "Klinka :: 
 // Patient Registration Page
 router.get("/patient-register", forwardAuthenticated, (req, res) => {
   const key = uuid();
+  const PID = uuid();
   res.render("patient-register", {
     key: key,
+    PID: PID,
     title: "Klinka :: Patient Registration",
   });
 });
 // Physician Registration Page
 router.get("/physician-register", forwardAuthenticated, (req, res) => {
   const key = uuid();
+  const PID = uuid();
   res.render("physician-register", {
     key: key,
+    PID: PID,
     title: "Klinka :: Physician Registration",
   });
 });
@@ -36,6 +40,13 @@ router.post(
   "/patient",
   [
     check("user_key").isUUID().withMessage("Error can not read User Key"),
+    check("PID").isUUID().withMessage("Error can not read PID"),
+    check("firstName")
+      .isLength({ min: 3, max: 35 })
+      .withMessage("First Name should be valid!"),
+    check("lastName")
+      .isLength({ min: 3, max: 35 })
+      .withMessage("Lirst Name should be valid!"),
     check("email")
       .isLength({ min: 6, max: 254 })
       .isEmail()
@@ -63,6 +74,9 @@ router.post(
     var errors = validationResult(req).errors;
     const {
       user_key,
+      PID,
+      firstName,
+      lastName,
       email,
       password,
       password2,
@@ -74,6 +88,9 @@ router.post(
       res.render("patient-register", {
         title: "Klinka :: Patient Registration",
         key: uuid(),
+        PID: uuid(),
+        firstName: firstName,
+        lastName: lastName,
         email: email,
         password: password,
         password2: password2,
@@ -89,6 +106,9 @@ router.post(
           res.render("patient-register", {
             title: "Klinka :: Patient Registration",
             key: uuid(),
+            PID: uuid(),
+            firstName: firstName,
+            lastName: lastName,
             email: email,
             password: password,
             password2: password2,
@@ -96,15 +116,16 @@ router.post(
             errors: errors,
           });
         } else {
+          const alias = firstName.substring(1,2) + lastName.substring(1,2) + PID.substring(1,8)
           const newUser = new User({
             user_key,
-            firstName: " ",
-            lastName: " ",
+            PID,
+            alias,
             email,
             password,
             dob,
             gender,
-            speciality: " ",
+            speciality: "N/A",
             effort,
             isPhysician: false,
           });
@@ -118,10 +139,11 @@ router.post(
               newUser
                 .save()
                 .then((user) => {
-                  res.render("login", {
-                    success: "Account created successfully, please log in..",
-                    title: "Klinka :: Login",
-                  });
+                  req.flash(
+                    'success_msg',
+                    'You are now registered and can log in'
+                  );
+                  res.redirect('/auth/login');
                 })
                 .catch((err) => console.log(err));
             });
@@ -137,6 +159,7 @@ router.post(
   "/physician",
   [
     check("user_key").isUUID().withMessage("Error can not read User Key"),
+    check("PID").isUUID().withMessage("Error can not read PID"),
     check("firstName")
       .isLength({ min: 3, max: 35 })
       .withMessage("First Name should be valid!"),
@@ -174,6 +197,7 @@ router.post(
     var errors = validationResult(req).errors;
     const {
       user_key,
+      PID,
       firstName,
       lastName,
       email,
@@ -188,6 +212,7 @@ router.post(
       res.render("physician-register", {
         title: "Klinka :: Physician Registration",
         key: uuid(),
+        PID: uuid(),
         firstName: firstName,
         lastName: lastName,
         email: email,
@@ -206,6 +231,7 @@ router.post(
           res.render("physician-register", {
             title: "Klinka :: Physician Registration",
             key: uuid(),
+            PID: uuid(),
             firstName: firstName,
             lastName: lastName,
             email: email,
@@ -216,16 +242,17 @@ router.post(
             errors: errors,
           });
         } else {
+          const alias = firstName.substring(1,2) + lastName.substring(1,2) + PID.substring(1,8)
           const newUser = new User({
             user_key,
-            firstName,
-            lastName,
+            PID,
+            alias,
             email,
             password,
             dob,
             gender,
             speciality,
-            effort: " ",
+            effort: "N/A",
             isPhysician: true,
             employedSince,
           });
@@ -239,10 +266,11 @@ router.post(
               newUser
                 .save()
                 .then((user) => {
-                  res.render("login", {
-                    success: "Account created successfully, please log in..",
-                    title: "Klinka :: Login",
-                  });
+                  req.flash(
+                    'success_msg',
+                    'You are now registered and can log in'
+                  );
+                  res.redirect('/auth/login');
                 })
                 .catch((err) => console.log(err));
             });
