@@ -33,10 +33,10 @@ router.get("/documentation", (req, res) =>
 );
 
 
-router.get("/dashboard", ensureAuthenticated, (req, res) =>
+router.get("/dashboard", ensureAuthenticated, (req, res) => {
   res.render("dashboard", { 
     title: "Klinka :: Dashboard", user: req.user
   })
-);
+});
 
 module.exports = router;

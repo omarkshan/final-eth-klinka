@@ -47,6 +47,14 @@ const userSchema = new mongoose.Schema({
     employedSince: {
         type: Date,
         required: false
+    },
+    isVerified: {
+        type: Boolean,
+        required: true
+    },
+    isSupervisor: {
+        type: Boolean,
+        required: true
     }
 })
 

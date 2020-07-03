@@ -62,6 +62,7 @@ app.use(function (req, res, next) {
 app.use("/", require("./routes/router"));
 app.use("/auth", require("./routes/authentication"));
 app.use("/dashboard", require("./routes/dashboard"));
+
 // Handling unknown routes
 app.get("*", function (req, res) {
   res.render("404");

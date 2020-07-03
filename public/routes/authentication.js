@@ -1,5 +1,5 @@
 const express = require("express");
-require('dotenv').config()
+require("dotenv").config();
 const router = express.Router();
 const { check, validationResult } = require("express-validator");
 const passport = require("passport");
@@ -356,6 +356,18 @@ router.post("/login", (req, res, next) => {
     failureRedirect: "/auth/login",
     failureFlash: true,
   })(req, res, next);
+});
+
+// Verify Account
+router.post("/verify", (req, res, next) => {
+  User.findOneAndUpdate(
+    {
+      PID: req.body.PID,
+    },
+    { isVerified: true }
+  ).then(function () {
+    console.log('Account is now verified');
+  });
 });
 
 // Logout

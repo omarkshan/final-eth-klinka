@@ -1,4 +1,4 @@
-<% var user %> 
+<% var user %>
 <div
   class="tab-pane fade"
   id="messages"
@@ -41,7 +41,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <form action="/compose" method="post">
+            <form action="/message" method="post">
               <div class="form-group">
                 <label for="from">From</label>
                 <input
@@ -64,6 +64,13 @@
                 />
               </div>
               <div class="form-group">
+                <label for="type">Type</label>
+                <select class="form-control" id="type">
+                  <option>Feedback</option>
+                  <option>Request</option>
+                </select>
+              </div>
+              <div class="form-group">
                 <label for="content">Content</label>
                 <textarea class="form-control" id="content" rows="3"></textarea>
               </div>
@@ -77,8 +84,13 @@
             >
               Cancel
             </button>
-            <button type="button" class="btn btn-outline-info">
-              Send
+            <input
+              type="submit"
+              class="btn btn-outline-info"
+              class="close"
+              data-dismiss="modal"
+              id="showToast"
+            >
             </button>
           </div>
         </div>
@@ -181,5 +193,27 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="position-absolute" style="top: 2rem; right: 2rem;">
+  <div
+    class="toast ml-auto"
+    role="alert"
+    data-delay="5000"
+  >
+    <div class="toast-header">
+      <strong class="mr-auto text-primary">Notification</strong>
+      <small class="text-muted">Just Now</small>
+      <button
+        type="button"
+        class="ml-2 mb-1 close"
+        data-dismiss="toast"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="toast-body">Your message is sent.. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
   </div>
 </div>

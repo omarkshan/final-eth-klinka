@@ -1,7 +1,14 @@
 <%- include('./partials/dashboard/header') %>
 <br />
 <div class="container">
-  <h4>Hello, <%= user.alias %> </h4>
+  <h4>
+    Hello, <%= user.alias %>
+  </h4>
+  <% if (user.isVerified) { %>
+  <div class="alert alert-success" role="alert">
+    <i class="fa fa-check" aria-hidden="true"></i> Verified Account
+  </div>
+  <% } %>
   <br />
   <ul class="nav nav-tabs">
     <li>
@@ -43,6 +50,21 @@
         EHRs
       </a>
     </li>
+    <% if (user.isSupervisor) { %>
+    <li>
+      <a
+        class="nav-link"
+        id="requests-tab"
+        data-toggle="pill"
+        href="#requests"
+        role="tab"
+        aria-controls="requests"
+        aria-selected="false"
+      >
+        Requests
+      </a>
+    </li>
+    <% } %>
     <li>
       <a
         class="nav-link"
@@ -57,7 +79,7 @@
       </a>
     </li>
   </ul>
-  <br>
+  <br />
   <div class="tab-content" id="tabContent">
     <!-- Personal Info tab -->
     <%- include('./partials/dashboard/personal-info', {user: user}) %>
@@ -70,6 +92,10 @@
     include('./partials/dashboard/ehr-patient') %> <% } %> <% if
     (user.isPhysician) { %> <%- include('./partials/dashboard/ehr-physician') %>
     <% } %>
+
+    <!-- EHRs tab -->
+    <% if (user.isSupervisor) { %> <%- include('./partials/dashboard/requests')
+    %> <% } %>
 
     <!-- Settings tab -->
     <div

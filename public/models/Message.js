@@ -21,7 +21,7 @@ const messageSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    isNew: {
+    isRead: {
         type: Boolean,
         required: true
     }
