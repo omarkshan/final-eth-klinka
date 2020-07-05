@@ -24,7 +24,7 @@
         Personal Info
       </a>
     </li>
-    <li>
+    <!-- <li>
       <a
         class="nav-link"
         id="messages-tab"
@@ -36,7 +36,7 @@
       >
         Messages <span class="badge badge-secondary">1</span>
       </a>
-    </li>
+    </li> -->
     <li>
       <a
         class="nav-link"
@@ -80,6 +80,7 @@
     </li>
   </ul>
   <br />
+  <%- include('./partials/messages') %>
   <div class="tab-content" id="tabContent">
     <!-- Personal Info tab -->
     <%- include('./partials/dashboard/personal-info', {user: user}) %>

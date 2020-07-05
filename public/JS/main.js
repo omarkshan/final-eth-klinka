@@ -106,11 +106,3 @@ function createPDF2() {
   });
 }
 
-$( document ).ready(function() {
-  var audio = new Audio('../assets/mail_sent.mp3');
-  $( "#showToast" ).click(function() {
-    $('.toast').toast('show');
-    audio.play();
-  });
-    
-});

@@ -1,15 +1,29 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../models/User");
+const Message = require("../models/Message");
 
-router.post("/updatePatient", (req, res) => {
-  const user_key = req.body.user_key;
-  const email = req.body.email;
-  const effort = req.body.effort;
-  User.findOneAndUpdate(
-    { user_key: user_key },
-    { $set: { email: email, effort: effort } }
+router.post("/compose", (req, res) => {
+  console.log("Creating message");
+  const { sender, reciever, subject, type, content } = req.body;
+
+  const newMessage = new Message({
+    sender: sender,
+    reciever: reciever,
+    subject: subject,
+    type: type,
+    content: content,
+    isRead: false,
+  });
+
+  newMessage.save().then((message) => {
+    console.log("Message Saved");
+  }).catch((err) => console.log(err));
+
+  req.flash(
+    "sent_msg",
+    'Your message is sent..'
   );
+  res.redirect('/dashboard')
 });
 
 module.exports = router;
