@@ -15,6 +15,9 @@ module.exports = function (passport) {
           return done(null, false, { message: "The Credentials you entered do not match our records!" });
         }
 
+        if (!user.isVerified) {
+          return done(null, false, { message: "This account is not yet verified" });
+        }
         // Match password
         bcrypt.compare(password, user.password, (err, isMatch) => {
           if (err) throw err;

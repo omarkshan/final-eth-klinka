@@ -6,6 +6,7 @@ const passport = require("passport");
 const bcrypt = require("bcryptjs");
 
 const User = require("../models/User");
+const Request = require("../models/Request");
 const { forwardAuthenticated } = require("../config/auth");
 const { uuid } = require("uuidv4");
 
@@ -146,6 +147,8 @@ router.post(
             speciality: "N/A",
             effort,
             isPhysician: false,
+            isVerified: true,
+            isSupervisor: false
           });
 
           // Hashing Password
@@ -300,7 +303,22 @@ router.post(
             effort: "N/A",
             isPhysician: true,
             employedSince,
+            isVerified: false,
+            isSupervisor: false
           });
+
+          const state = req.body.state
+          const city = req.body.city
+
+          const newRequest = new Request({
+            PID,
+            alias,
+            firstName,
+            lastName,
+            state,
+            city,
+            speciality
+          })
 
           // Hashing Password
           console.log("Checking Password");
@@ -334,6 +352,9 @@ router.post(
                     if (error) console.log(error);
                     else console.log(`Email sent: ${info.response}`);
                   });
+                  newRequest.save().then((request) => {
+                    console.log("Request added");
+                  }).catch((err) => console.log(err));
                   req.flash(
                     "success_msg",
                     "Please check your email inbox, You are now registered and can log in"

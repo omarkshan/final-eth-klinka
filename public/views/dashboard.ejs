@@ -1,14 +1,29 @@
 <%- include('./partials/dashboard/header') %>
 <br />
 <div class="container">
-  <h4>
-    Hello, <%= user.alias %>
-  </h4>
-  <% if (user.isVerified) { %>
-  <div class="alert alert-success" role="alert">
-    <i class="fa fa-check" aria-hidden="true"></i> Verified Account
+  <div class="row">
+    <div class="col-12">
+      <div class="alert alert-dark" role="alert">
+        <h4><i class="fa fa-user" aria-hidden="true"></i> <%= user.alias %></h4>
+      </div>
+    </div>
   </div>
-  <% } %>
+  <div class="row">
+    <div class="col-6">
+      <% if (user.isVerified) { %>
+      <div class="alert alert-success" role="alert">
+        <i class="fa fa-user-check" aria-hidden="true"></i> Verified Account
+      </div>
+      <% } %>
+    </div>
+    <div class="col-6">
+      <% if (user.isSupervisor) { %>
+      <div class="alert alert-info" role="alert">
+        <i class="fa fa-user-shield" aria-hidden="true"></i> Supervisor
+      </div>
+      <% } %>
+    </div>
+  </div>
   <br />
   <ul class="nav nav-tabs">
     <li>
@@ -90,13 +105,13 @@
 
     <!-- EHRs tab -->
     <% if (!user.isPhysician) { %> <%-
-    include('./partials/dashboard/ehr-patient') %> <% } %> <% if
-    (user.isPhysician) { %> <%- include('./partials/dashboard/ehr-physician') %>
+    include('./partials/dashboard/ehr-patient') %> <% } %> <% if (user.isPhysician) { %> <%- include('./partials/dashboard/ehr-physician') %>
     <% } %>
 
     <!-- EHRs tab -->
-    <% if (user.isSupervisor) { %> <%- include('./partials/dashboard/requests')
-    %> <% } %>
+    <% if (user.isSupervisor) { %> 
+      <%- include('./partials/dashboard/requests')%> 
+      <% } %>
 
     <!-- Settings tab -->
     <div
