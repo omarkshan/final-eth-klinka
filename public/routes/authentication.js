@@ -6,7 +6,7 @@ const passport = require("passport");
 const bcrypt = require("bcryptjs");
 
 const User = require("../models/User");
-const Request = require("../models/Request");
+const PhysiciansSyndicate = require("../models/PhysiciansSyndicate");
 const { forwardAuthenticated } = require("../config/auth");
 const { uuid } = require("uuidv4");
 
@@ -84,7 +84,15 @@ router.post(
     check("effort")
       .isString()
       .notEmpty()
-      .withMessage("Please select your average daily effort"),
+      .withMessage("Please select your average daily effort!"),
+    check("address")
+      .isString()
+      .notEmpty()
+      .withMessage("Please type-in your wallet address!"),
+    check("blood")
+      .isString()
+      .notEmpty()
+      .withMessage("Please Choose your blood type!"),
   ],
   (req, res) => {
     var errors = validationResult(req).errors;
@@ -99,6 +107,8 @@ router.post(
       dob,
       gender,
       effort,
+      address,
+      blood
     } = req.body;
     if (errors.length > 1) {
       res.render("patient-register", {
@@ -111,6 +121,8 @@ router.post(
         password: password,
         password2: password2,
         dob: dob,
+        address: address,
+        blood: blood,
         errors: errors,
       });
     } else {
@@ -129,6 +141,8 @@ router.post(
             password: password,
             password2: password2,
             dob: dob,
+            address: address,
+            blood: blood,
             errors: errors,
           });
         } else {
@@ -148,7 +162,9 @@ router.post(
             effort,
             isPhysician: false,
             isVerified: true,
-            isSupervisor: false
+            isSupervisor: false,
+            address,
+            blood
           });
 
           // Hashing Password
@@ -162,7 +178,7 @@ router.post(
                 .then((user) => {
                   var emailBody = `<img src="cid:logo"><br><h3>Registration is Successful</h3><p>Your request to create a new <strong>Patient</strong> account was completed successfully.<br>You can now log in from <a href="klinka.herokuapp.com/auth/login">Klinka Login</a> to use the platform</p>
                   <h5>Account Credentials</h5>
-                  <p><strong>User Key:</strong> ${newUser.user_key} <br><strong>PID:</strong> ${newUser.PID} <br><hr><br><strong>DO NOT SHARE THE USER KEY WITH ANYONE INSIDE OR OUTSIDE THE NETWORK!</strong></p><br><hr><p><strong>Klinka&copy;</strong>&nbsp;All Copyrights reserved.`;
+                  <p><strong>User Key:</strong> ${newUser.user_key} <br><strong>Wallet Address:</strong> ${newUser.PID} <br><strong>PID:</strong> ${newUser.address} <br><hr><br><strong>DO NOT SHARE THE USER KEY WITH ANYONE INSIDE OR OUTSIDE THE NETWORK!</strong></p><br><hr><p><strong>Klinka&copy;</strong>&nbsp;All Copyrights reserved.`;
                   var mailOptions = {
                     from: process.env.SENDER_MAIL,
                     to: `${newUser.email}`,
@@ -234,7 +250,11 @@ router.post(
     check("speciality")
       .isString()
       .notEmpty()
-      .withMessage("Please select your speciality"),
+      .withMessage("Please select your speciality!"),
+    check("address")
+      .isString()
+      .notEmpty()
+      .withMessage("Please type-in your wallet address!"),
   ],
   (req, res) => {
     var errors = validationResult(req).errors;
@@ -250,6 +270,7 @@ router.post(
       employedSince,
       gender,
       speciality,
+      address
     } = req.body;
     if (errors.length > 1) {
       console.log("Errors Found");
@@ -264,6 +285,7 @@ router.post(
         password2: password2,
         dob: dob,
         employedSince: employedSince,
+        address: address,
         errors: errors,
       });
     } else {
@@ -284,6 +306,7 @@ router.post(
             password2: password2,
             dob: dob,
             employedSince: employedSince,
+            address: address,
             errors: errors,
           });
         } else {
@@ -304,21 +327,12 @@ router.post(
             isPhysician: true,
             employedSince,
             isVerified: false,
-            isSupervisor: false
+            isSupervisor: false,
+            address
           });
 
           const state = req.body.state
           const city = req.body.city
-
-          const newRequest = new Request({
-            PID,
-            alias,
-            firstName,
-            lastName,
-            state,
-            city,
-            speciality
-          })
 
           // Hashing Password
           console.log("Checking Password");
@@ -333,7 +347,7 @@ router.post(
                   console.log("Physician Registered");
                   var emailBody = `<img src="cid:logo"><br><h3>Registration is Successful</h3><p>Your request to create a new <strong>Patient</strong> account was completed successfully.<br>You can now log in from <a href="klinka.herokuapp.com/auth/login">Klinka Login</a> to use the platform</p>
                   <h5>Account Credentials</h5>
-                  <p><strong>User Key:</strong> ${newUser.user_key} <br><strong>PID:</strong> ${newUser.PID} <br><hr><br><strong>DO NOT SHARE THE USER KEY WITH ANYONE INSIDE OR OUTSIDE THE NETWORK!</strong></p><br><hr><p><strong>Klinka&copy;</strong>&nbsp;All Copyrights reserved.`;
+                  <p><strong>User Key:</strong> ${newUser.user_key} <br><strong>PID:</strong> ${newUser.PID} <br><strong>Wallet Address:</strong> ${newUser.address} <br><hr><br><strong>DO NOT SHARE THE USER KEY WITH ANYONE INSIDE OR OUTSIDE THE NETWORK!</strong></p><br><hr><p><strong>Klinka&copy;</strong>&nbsp;All Copyrights reserved.`;
                   var mailOptions = {
                     from: process.env.SENDER_MAIL,
                     to: `${newUser.email}`,
@@ -352,9 +366,6 @@ router.post(
                     if (error) console.log(error);
                     else console.log(`Email sent: ${info.response}`);
                   });
-                  newRequest.save().then((request) => {
-                    console.log("Request added");
-                  }).catch((err) => console.log(err));
                   req.flash(
                     "success_msg",
                     "Please check your email inbox, You are now registered and can log in"

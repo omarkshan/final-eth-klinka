@@ -55,6 +55,14 @@ const userSchema = new mongoose.Schema({
     isSupervisor: {
         type: Boolean,
         required: true
+    },
+    address: {
+        type: String,
+        required: true
+    },
+    blood: {
+        type: String,
+        required: false
     }
 })
 

@@ -1,276 +1,623 @@
-const _NETWORK_ADDRESS = "0x445724D1B5c5c0B330f270494eE3ef8444879669";
-const _ACCOUNT_ADDRESS = "0x33CC2373698bd53fAD77F1Bf43f6334Bcf986d35";
-const _ABI = [
+const NetworkAddress = "0xa7d29fd305d2b244eec75bb9f35c7d6c2e9dd9c8";
+const NetworkABI = [
   {
-    inputs: [
+    "constant": false,
+    "inputs": [
       {
-        internalType: "string",
-        name: "_id",
-        type: "string",
-      },
+        "internalType": "address payable",
+        "name": "_receiver",
+        "type": "address"
+      }
     ],
-    name: "createRecord",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "sendAuthorizationEther",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [
+    "constant": true,
+    "inputs": [
       {
-        internalType: "string",
-        name: "_id",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "_add_notes",
-        type: "string",
-      },
+        "internalType": "string",
+        "name": "_address",
+        "type": "string"
+      }
     ],
-    name: "setAdditionalNotes",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "isValidPatient",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "constant": true,
+    "inputs": [
       {
-        internalType: "string",
-        name: "_id",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "_clinic",
-        type: "string",
-      },
+        "internalType": "string",
+        "name": "_address",
+        "type": "string"
+      }
     ],
-    name: "setClinic",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "isValidPhysician",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "constant": true,
+    "inputs": [],
+    "name": "getUserType",
+    "outputs": [
       {
-        internalType: "string",
-        name: "_id",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "_clinic_type",
-        type: "string",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    name: "setClinicType",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "constant": true,
+    "inputs": [
       {
-        internalType: "string",
-        name: "_id",
-        type: "string",
+        "internalType": "string",
+        "name": "_requester",
+        "type": "string"
       },
       {
-        internalType: "string",
-        name: "_dateTime",
-        type: "string",
-      },
+        "internalType": "string",
+        "name": "_patient",
+        "type": "string"
+      }
     ],
-    name: "setDateTime",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "isAuthorized",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "constant": false,
+    "inputs": [
       {
-        internalType: "string",
-        name: "_id",
-        type: "string",
+        "internalType": "string",
+        "name": "_address",
+        "type": "string"
       },
       {
-        internalType: "string",
-        name: "_physician",
-        type: "string",
+        "internalType": "uint256",
+        "name": "_DOB",
+        "type": "uint256"
       },
+      {
+        "internalType": "uint256",
+        "name": "_employedSince",
+        "type": "uint256"
+      }
     ],
-    name: "setPhysician",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "registerPhysician",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
   },
   {
-    inputs: [
+    "constant": false,
+    "inputs": [
       {
-        internalType: "string",
-        name: "_id",
-        type: "string",
+        "internalType": "string",
+        "name": "_address",
+        "type": "string"
       },
       {
-        internalType: "string",
-        name: "_severity",
-        type: "string",
+        "internalType": "uint256",
+        "name": "_DOB",
+        "type": "uint256"
       },
+      {
+        "internalType": "uint256",
+        "name": "_bloodGrp",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_height",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_weight",
+        "type": "uint256"
+      }
     ],
-    name: "setSeverity",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "registerPatient",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
   },
   {
-    inputs: [
+    "constant": false,
+    "inputs": [
       {
-        internalType: "string",
-        name: "_id",
-        type: "string",
+        "internalType": "string",
+        "name": "pId",
+        "type": "string"
       },
       {
-        internalType: "string",
-        name: "_symptom",
-        type: "string",
+        "internalType": "string",
+        "name": "patId",
+        "type": "string"
       },
+      {
+        "internalType": "address payable",
+        "name": "_pId",
+        "type": "address"
+      }
     ],
-    name: "setSymptom",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "authorizePhysician",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
   },
   {
-    inputs: [
+    "constant": false,
+    "inputs": [
       {
-        internalType: "string",
-        name: "_id",
-        type: "string",
+        "internalType": "string",
+        "name": "pId",
+        "type": "string"
       },
-    ],
-    name: "getAdditionalNotes",
-    outputs: [
       {
-        internalType: "string",
-        name: "",
-        type: "string",
-      },
+        "internalType": "string",
+        "name": "patId",
+        "type": "string"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "name": "removeAuthorization",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [
+    "constant": true,
+    "inputs": [
       {
-        internalType: "string",
-        name: "_id",
-        type: "string",
-      },
+        "internalType": "string",
+        "name": "_address",
+        "type": "string"
+      }
     ],
-    name: "getClinic",
-    outputs: [
+    "name": "getPatient",
+    "outputs": [
       {
-        internalType: "string",
-        name: "",
-        type: "string",
-      },
+        "components": [
+          {
+            "internalType": "address",
+            "name": "id",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "DOB",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "bloodGrp",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "height",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "weight",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "currentRecord",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "recordsCount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "is_valid",
+            "type": "bool"
+          },
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "id",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "date_time",
+                "type": "uint256"
+              },
+              {
+                "internalType": "address",
+                "name": "phyicianRef",
+                "type": "address"
+              },
+              {
+                "internalType": "string",
+                "name": "description",
+                "type": "string"
+              },
+              {
+                "internalType": "bool",
+                "name": "is_fault",
+                "type": "bool"
+              },
+              {
+                "internalType": "uint256[]",
+                "name": "symptoms",
+                "type": "uint256[]"
+              }
+            ],
+            "internalType": "struct Network.Record[]",
+            "name": "records",
+            "type": "tuple[]"
+          }
+        ],
+        "internalType": "struct Network.Patient",
+        "name": "",
+        "type": "tuple"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "constant": true,
+    "inputs": [
       {
-        internalType: "string",
-        name: "_id",
-        type: "string",
-      },
+        "internalType": "string",
+        "name": "_pId",
+        "type": "string"
+      }
     ],
-    name: "getClinicType",
-    outputs: [
+    "name": "getPhysician",
+    "outputs": [
       {
-        internalType: "string",
-        name: "",
-        type: "string",
-      },
+        "components": [
+          {
+            "internalType": "address",
+            "name": "id",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "DOB",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "employedSince",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "is_valid",
+            "type": "bool"
+          },
+          {
+            "internalType": "uint256",
+            "name": "totalPatients",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address[]",
+            "name": "patients",
+            "type": "address[]"
+          }
+        ],
+        "internalType": "struct Network.Physician",
+        "name": "",
+        "type": "tuple"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "constant": false,
+    "inputs": [
       {
-        internalType: "string",
-        name: "_id",
-        type: "string",
-      },
+        "internalType": "string",
+        "name": "_patId",
+        "type": "string"
+      }
     ],
-    name: "getDateTime",
-    outputs: [
-      {
-        internalType: "string",
-        name: "",
-        type: "string",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
+    "name": "deactivatePatient",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [
+    "constant": false,
+    "inputs": [
       {
-        internalType: "string",
-        name: "_id",
-        type: "string",
-      },
+        "internalType": "string",
+        "name": "_pId",
+        "type": "string"
+      }
     ],
-    name: "getPhysician",
-    outputs: [
-      {
-        internalType: "string",
-        name: "",
-        type: "string",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
+    "name": "deactivatePhysician",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [
+    "constant": false,
+    "inputs": [
       {
-        internalType: "string",
-        name: "_id",
-        type: "string",
+        "internalType": "uint256",
+        "name": "_d_t",
+        "type": "uint256"
       },
-    ],
-    name: "getSeverity",
-    outputs: [
       {
-        internalType: "string",
-        name: "",
-        type: "string",
+        "internalType": "string",
+        "name": "_d",
+        "type": "string"
       },
+      {
+        "internalType": "uint256[]",
+        "name": "_sym",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "string",
+        "name": "_patId",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_pId",
+        "type": "string"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "name": "addRecord",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
   },
   {
-    inputs: [
+    "constant": false,
+    "inputs": [
       {
-        internalType: "string",
-        name: "_id",
-        type: "string",
+        "internalType": "uint256",
+        "name": "_id",
+        "type": "uint256"
       },
-    ],
-    name: "getSymptom",
-    outputs: [
       {
-        internalType: "string",
-        name: "",
-        type: "string",
+        "internalType": "string",
+        "name": "_d",
+        "type": "string"
       },
+      {
+        "internalType": "uint256[]",
+        "name": "_sym",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "string",
+        "name": "_patId",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_pId",
+        "type": "string"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "name": "updateRecord",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
   },
-];
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_patId",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_pId",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "recId",
+        "type": "uint256"
+      }
+    ],
+    "name": "setRecordFault",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_patId",
+        "type": "string"
+      }
+    ],
+    "name": "getRecordsCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_patId",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "recId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getRecord",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "id",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "date_time",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "phyicianRef",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "internalType": "bool",
+            "name": "is_fault",
+            "type": "bool"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "symptoms",
+            "type": "uint256[]"
+          }
+        ],
+        "internalType": "struct Network.Record",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getTotalPhysicians",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getTotalPatients",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getTotalFaultRecords",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getTotalRecords",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  }
+]
