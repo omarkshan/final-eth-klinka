@@ -105,4 +105,3 @@ function createPDF2() {
     pdf2.save("Klinka_PID.pdf");
   });
 }
-
