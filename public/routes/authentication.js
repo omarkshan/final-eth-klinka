@@ -6,7 +6,7 @@ const passport = require("passport");
 const bcrypt = require("bcryptjs");
 
 const User = require("../models/User");
-const PhysiciansSyndicate = require("../models/PhysiciansSyndicate");
+// const PhysiciansSyndicate = require("../models/PhysiciansSyndicate");
 const { forwardAuthenticated } = require("../config/auth");
 const { uuid } = require("uuidv4");
 
@@ -108,7 +108,7 @@ router.post(
       gender,
       effort,
       address,
-      blood
+      blood,
     } = req.body;
     if (errors.length > 1) {
       res.render("patient-register", {
@@ -164,7 +164,7 @@ router.post(
             isVerified: true,
             isSupervisor: false,
             address,
-            blood
+            blood,
           });
 
           // Hashing Password
@@ -270,7 +270,7 @@ router.post(
       employedSince,
       gender,
       speciality,
-      address
+      address,
     } = req.body;
     if (errors.length > 1) {
       console.log("Errors Found");
@@ -328,11 +328,11 @@ router.post(
             employedSince,
             isVerified: false,
             isSupervisor: false,
-            address
+            address,
           });
 
-          const state = req.body.state
-          const city = req.body.city
+          const state = req.body.state;
+          const city = req.body.city;
 
           // Hashing Password
           console.log("Checking Password");
@@ -398,7 +398,7 @@ router.post("/verify", (req, res, next) => {
     },
     { isVerified: true }
   ).then(function () {
-    console.log('Account is now verified');
+    console.log("Account is now verified");
   });
 });
 
